@@ -8,7 +8,9 @@ angular.module('confusionApp')
   $scope.tab = 1;
   $scope.filtText = '';
   $scope.showDetails = false;
+
   $scope.dishes = menuFactory.getDishes();
+
 
   $scope.select = function(setTab) {
     $scope.tab = setTab;
@@ -81,52 +83,66 @@ angular.module('confusionApp')
   };
 }])
 
-.controller('DishDetailController', ['$scope', '$routeParams', 'menuFactory',
-  function($scope, $routeParams, menuFactory) {
-    $scope.dish = menuFactory.getDish(parseInt($routeParams.id, 10));
+.controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory',
+  function($scope, $stateParams, menuFactory) {
+
+    var dish = menuFactory.getDish(parseInt($stateParams.id, 10));
+
+    $scope.dish = dish;
+
   }
 ])
 
 .controller('DishCommentController', ['$scope', function($scope) {
 
-  //Step 1: Create a JavaScript object to hold the comment from the form
-  $scope.inputs = {
+  $scope.mycomment = {
     rating: 5,
     comment: "",
     author: "",
     date: ""
   };
 
-  // Submit Comment Function
   $scope.submitComment = function() {
-    //Step 2: This is how you record the date
-    //"The date property of your JavaScript object holding the comment" = new Date().toISOString();
-    $scope.inputs.date = new Date().toISOString();
-    // -- Parse Rating to Int to ensure sorting work --
-    $scope.inputs.rating = parseInt($scope.inputs.rating);
-    //console.log($scope.inputs);
 
-    // Step 3: Push your comment into the dish's comment array
-    $scope.dish.comments.push($scope.inputs);
+    $scope.mycomment.date = new Date().toISOString();
+    console.log($scope.mycomment);
 
-    //Step 4: reset your form to pristine
+    $scope.dish.comments.push($scope.mycomment);
+
     $scope.commentForm.$setPristine();
 
-    //Step 5: reset your JavaScript object that holds your comment
-    $scope.inputs = {
+    $scope.mycomment = {
       rating: 5,
       comment: "",
       author: "",
       date: ""
     };
-    $scope.$parent.inputs = {
-      rating: 5,
-      comment: "",
-      author: "",
-      date: ""
-    };
-    //console.log($scope.inputs);
   }
 }])
 
-;
+// implement the IndexController and About Controller here
+
+
+.controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory',
+  function($scope,
+    menuFactory, corporateFactory) {
+    // Get Dish
+    var dish = menuFactory.getDish(0);
+    $scope.dish = dish;
+
+    // Get promotion
+    var promotion = menuFactory.getPromotion(0);
+    $scope.promotion = promotion;
+
+    // Get Leader
+    var leader = corporateFactory.getLeader(0)
+    $scope.leader = leader;
+  }
+])
+
+.controller('AboutController', ['$scope', 'corporateFactory', function($scope,
+  corporateFactory) {
+
+  $scope.leaders = corporateFactory.getLeaders();
+
+}]);
