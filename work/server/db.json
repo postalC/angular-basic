@@ -47,7 +47,7 @@
       "image": "images/zucchipakoda.png",
       "category": "appetizer",
       "label": "",
-      "price": "1.99",
+      "price": 1.99,
       "description": "Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce",
       "comments": [
         {
@@ -79,6 +79,18 @@
           "comment": "It's your birthday, we're gonna party!",
           "author": "25 Cent",
           "date": "2011-12-02T17:57:28.556094Z"
+        },
+        {
+          "rating": 3,
+          "comment": "Test",
+          "author": "chai",
+          "date": "2016-01-23T07:01:51.948Z"
+        },
+        {
+          "rating": 2,
+          "comment": "test",
+          "author": "chai",
+          "date": "2016-01-24T05:26:12.066Z"
         }
       ]
     },
@@ -209,5 +221,45 @@
       "description": "Award winning three-star Michelin chef with wide International experience having worked closely with whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion experiences. He says, Put together the cuisines from the two craziest cultures, and you get a winning hit! Amma Mia!"
     }
   ],
-  "feedback": []
+  "feedback": [
+    {
+      "mychannel": "Email",
+      "firstName": "ca1",
+      "lastName": "chai",
+      "agree": true,
+      "email": "test@test.com",
+      "tel": {
+        "areaCode": "56",
+        "number": "121 1212"
+      },
+      "comments": "testy",
+      "id": 1
+    },
+    {
+      "mychannel": "Email",
+      "firstName": "test21",
+      "lastName": "CHAI",
+      "agree": true,
+      "email": "test@test.com",
+      "tel": {
+        "areaCode": "12",
+        "number": "1212 334 43"
+      },
+      "comments": "test",
+      "id": 2
+    },
+    {
+      "mychannel": "tel",
+      "firstName": "Chai1",
+      "lastName": "chi",
+      "agree": true,
+      "email": "test@test.com",
+      "tel": {
+        "areaCode": "54",
+        "number": "12121 121"
+      },
+      "comments": "test",
+      "id": 3
+    }
+  ]
 }

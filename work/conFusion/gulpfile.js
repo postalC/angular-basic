@@ -25,8 +25,26 @@ gulp.task('jshint', function() {
 //  Use Min
 gulp.task('usemin', ['jshint'], function() {
   return gulp.src('./app/**/*.html')
+    // .pipe(usemin({
+    //   css: [minifycss(), rev()],
+    //   js: [ngannotate(), uglify(), rev()]
+    // }).on('error', function(e) {
+    //   console.log(e);
+    // }))
+    .pipe(gulp.dest('dist/'));
+});
+
+//  Css Min
+gulp.task('cssmin', ['jshint'], function() {
+  return gulp.src('./app/**/*.css')
+    .pipe(minifycss())
+    .pipe(gulp.dest('dist/'));
+});
+
+//  JS Min
+gulp.task('jsmin', ['jshint'], function() {
+  return gulp.src('./app/**/*.js')
     .pipe(usemin({
-      css: [minifycss(), rev()],
       js: [ngannotate(), uglify(), rev()]
     }).on('error', function(e) {
       console.log(e);
@@ -55,11 +73,12 @@ gulp.task('clean', function() {
 
 // Copy Fonts
 gulp.task('copyfonts', ['clean'], function() {
-  gulp.src('./bower_components/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
-    .pipe(gulp.dest('./dist/fonts'));
+  gulp.src(
+      './bower_components/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
+    .pipe(gulp.dest('./dist/bower_components/font-awesome/fonts'));
   gulp.src(
       './bower_components/bootstrap/dist/fonts/**/*.{ttf,woff,eof,svg}*')
-    .pipe(gulp.dest('./dist/fonts'));
+    .pipe(gulp.dest('./dist/bower_components/bootstrap/dist/fonts'));
 });
 
 // Watch
@@ -94,5 +113,5 @@ gulp.task('browser-sync', ['default'], function() {
 
 // Default task
 gulp.task('default', ['clean'], function() {
-  gulp.start('usemin', 'imagemin', 'copyfonts');
+  gulp.start('usemin', 'cssmin', 'jsmin', 'imagemin', 'copyfonts');
 });
